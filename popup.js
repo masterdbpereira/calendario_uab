@@ -26,6 +26,13 @@ $(document).ready(function () {
         set_buttons_information();
     });
 
+    //botao que redefine os nomes e url dos botões
+    $("#alarmButton1").click(function(){
+        set_alarm1();
+    });
+
+    
+
     load_buttons_information();
 
     // Substitui o ano no titulo html pela variavel ano do ucs.js
@@ -333,3 +340,15 @@ function set_buttons_information() {
     load_buttons_information();
 
 }
+
+
+// Funcao que define o trigger do alarm
+function set_alarm1(){
+    alert("define alarm");
+    chrome.alarms.create("myAlarm", {delayInMinutes: 0.1} );
+}
+
+chrome.alarms.onAlarm.addListener(function(alarm) {
+    alert("Beep");
+  });
+
