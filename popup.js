@@ -26,11 +26,24 @@ $(document).ready(function () {
         set_buttons_information();
     });
 
-    //botao que redefine os nomes e url dos botões
-    $("#alarmButton1").click(function(){
-        set_alarm1();
+    //botao que define alarme de 10min
+    $("#alarmButton10").click(function(){
+        set_alarm(10);
+    });
+    //botao que define alarme de 20min
+    $("#alarmButton20").click(function(){
+        set_alarm(20);
+    });
+    //botao que define alarme de 40min
+    $("#alarmButton40").click(function(){
+        set_alarm(40);
+    });
+    //botao que cancela o alarme
+    $("#alarmButtonCancel").click(function(){
+        cancel_alarm();
     });
 
+    
     
 
     load_buttons_information();
@@ -343,12 +356,16 @@ function set_buttons_information() {
 
 
 // Funcao que define o trigger do alarm
-function set_alarm1(){
-    alert("define alarm");
-    chrome.alarms.create("myAlarm", {delayInMinutes: 0.1} );
+function set_alarm(t){
+    chrome.alarms.create("myAlarm", {delayInMinutes: t} );
+    alert("Alarme definido para " + t + "minutos");
+    chrome.browserAction.setBadgeText({text:''});
 }
 
-chrome.alarms.onAlarm.addListener(function(alarm) {
-    alert("Beep");
-  });
+// Funcao que define o trigger do alarm
+function cancel_alarm(){
+    chrome.alarms.clear("myAlarm");
+    alert("Alarme cancelado");
+    chrome.browserAction.setBadgeText({text:''});
+}
 
